@@ -11,4 +11,5 @@ export default {
     asideExpandWidth: '256px',
     asideCollapseWidth: '64px',
   },
+  pageSize: 10,
 };

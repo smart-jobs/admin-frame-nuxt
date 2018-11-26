@@ -35,7 +35,7 @@ import DataGrid from '@/naf/data/filter-grid';
 import DeptTree from '@/naf/user/dept-tree';
 import { createNamespacedHelpers } from 'vuex';
 import * as types from '@/store/system/.dict';
-import config from '@/utils/config.js';
+import config from '@/config';
 const { pageSize = 10 } = config;
 
 const { mapState, mapActions, mapMutations } = createNamespacedHelpers(
