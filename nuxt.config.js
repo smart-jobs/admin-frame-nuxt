@@ -1,5 +1,8 @@
+import { resolve, join } from 'path';
 
 const url_prefix = `/admin`;
+
+const frameSrc = resolve(__dirname, '../admin-frame');
 
 module.exports = {
   // mode: 'spa',
@@ -48,10 +51,10 @@ module.exports = {
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
     ['@nuxtjs/proxy', { 
-      pathRewrite: {
-        '.*/api/system/dict': '/', '.*/api/system': '/',
-        '.*/api/naf/code': '/api', '.*/api/naf': '/api',
-      }
+      // pathRewrite: {
+      //   '.*/api/system/dict': '/', '.*/api/system': '/',
+      //   '.*/api/naf/code': '/api', '.*/api/naf': '/api',
+      // }
     }],
     '@nuxtjs/axios', 
   ],
@@ -61,14 +64,14 @@ module.exports = {
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
     proxy: true,
-    prefix: `${url_prefix}/api`,
+    prefix: '/platform/api', // `${url_prefix}/api`,
     port: 3000,
   },
   proxy: [
-    `http://localhost:8002${url_prefix}/api/system/dict`,
-    `http://localhost:8001${url_prefix}/api/system`,
-    `http://localhost:8002${url_prefix}/api/naf/dict`,
-    `http://localhost:8001${url_prefix}/api/naf`,
+    `http://localhost:3001${url_prefix}/system`,
+    `http://localhost:3002${url_prefix}/jobs`,
+    `http://localhost:3003${url_prefix}/docflow`,
+    'http://99991.smart.chinahuian.cn/platform/api',
   ],
   loader: [
     {
@@ -101,11 +104,11 @@ module.exports = {
           exclude: /(node_modules)/
         })
       }
-      // // 设置别名
-      // config.resolve.alias = {
-      //   ...(config.resolve.alias||{}),
-      //   '@': resolve('src'),
-      // }
+      // 设置别名
+      config.resolve.alias = {
+        ...(config.resolve.alias||{}),
+        '@frame': frameSrc,
+      }
     }
   },
   router: {
@@ -115,9 +118,9 @@ module.exports = {
       // TODO: 重定向默认地址到'/system'
       let index = routes.findIndex(p => p.path === '/');
       if (index != -1)
-        routes[index] = { path: '/', redirect: '/system' };
+        routes[index] = { path: '/', redirect: '/system/' };
       else
-        routes.push({ path: '/', redirect: '/system' });
+        routes.push({ path: '/', redirect: '/system/' });
     }
   },
   vue: {

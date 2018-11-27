@@ -33,7 +33,7 @@ import DataForm from '@/naf/data/form';
 import DataGrid from '@/naf/data/lite-grid';
 import DeptTree from '@/naf/user/dept-tree';
 import { createNamespacedHelpers } from 'vuex';
-import config from '@/config';
+import config from '@frame/config';
 import * as types from '@/store/system/.dept';
 
 const { rootName } = config;

@@ -1,5 +1,5 @@
 import * as types from './.dict.js';
-import config from '@/config';
+import config from '@frame/config';
 const { pageSize = 10 } = config;
 
 const api = {
